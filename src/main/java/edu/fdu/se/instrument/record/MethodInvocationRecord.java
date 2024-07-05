@@ -1,4 +1,4 @@
-package edu.fdu.se.instrument;
+package edu.fdu.se.instrument.record;
 
 import java.util.List;
 import java.util.Map;

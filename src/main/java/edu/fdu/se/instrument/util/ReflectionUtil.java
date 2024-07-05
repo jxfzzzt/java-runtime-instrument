@@ -1,4 +1,4 @@
-package edu.fdu.se.util;
+package edu.fdu.se.instrument.util;
 
 import com.nqzero.permit.Permit;
 import lombok.extern.slf4j.Slf4j;

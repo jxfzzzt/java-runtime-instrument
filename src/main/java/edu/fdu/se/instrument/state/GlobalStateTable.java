@@ -1,7 +1,7 @@
 package edu.fdu.se.instrument.state;
 
-import edu.fdu.se.util.CopyObjectResult;
-import edu.fdu.se.util.ObjectUtil;
+import edu.fdu.se.instrument.util.CopyObjectResult;
+import edu.fdu.se.instrument.util.ObjectUtil;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -11,18 +11,29 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class GlobalStateTable {
 
+    private static Integer POINTER = 0;
+
     private static final Map<String, StateNode> STATE_TABLE = new ConcurrentHashMap<>();
 
     private static final Set<String> STATE_SET = new HashSet<>();
 
+    private static final Map<Integer, String> INVOCATION_RECORD_MAP = new HashMap<>();
+
 
     public synchronized static void reset() {
+        POINTER = 0;
         STATE_TABLE.clear();
         STATE_SET.clear();
+        INVOCATION_RECORD_MAP.clear();
     }
 
     public synchronized static void addMethodSignature(String methodSignature) {
         STATE_SET.add(methodSignature);
+    }
+
+    public synchronized static void addMethodInvocation(String methodSignature) {
+        POINTER += 1;
+        INVOCATION_RECORD_MAP.put(POINTER, methodSignature);
     }
 
     public static void addStateNode(String signature, byte value) {
@@ -170,5 +181,9 @@ public class GlobalStateTable {
 
     public synchronized static Set<String> getMethodSignatureSet() {
         return new HashSet<>(STATE_SET);
+    }
+
+    public synchronized static Map<Integer, String> getInvocationRecordMap() {
+        return new HashMap<>(INVOCATION_RECORD_MAP);
     }
 }

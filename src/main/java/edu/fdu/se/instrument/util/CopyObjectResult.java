@@ -1,4 +1,4 @@
-package edu.fdu.se.util;
+package edu.fdu.se.instrument.util;
 
 public class CopyObjectResult<T> {
 
