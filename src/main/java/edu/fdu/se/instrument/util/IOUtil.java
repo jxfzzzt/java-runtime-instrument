@@ -1,12 +1,10 @@
 package edu.fdu.se.instrument.util;
 
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 
 import java.io.*;
 import java.nio.file.Files;
 
-@Slf4j
 public class IOUtil {
     public static final int EOF = -1;
 

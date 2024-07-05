@@ -10,7 +10,6 @@ import java.lang.instrument.ClassFileTransformer;
 import java.lang.instrument.IllegalClassFormatException;
 import java.security.ProtectionDomain;
 
-@Slf4j
 public class InstrumentTransformer implements ClassFileTransformer {
     private final static String[] CLASS_BAN_LIST = {"edu/fdu/se/instrument", "[", "java/lang", "org/eclipse/collections", "janala", "org/objectweb/asm", "sun", "jdk", "java/util/function"};
 

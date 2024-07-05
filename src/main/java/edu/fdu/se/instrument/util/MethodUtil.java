@@ -9,7 +9,6 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-@Slf4j
 public class MethodUtil {
 
     public static String getMethodSignature(String className, String methodName, org.objectweb.asm.Type returnType, org.objectweb.asm.Type[] argTypes) {

@@ -6,7 +6,6 @@ import sun.reflect.ReflectionFactory;
 
 import java.lang.reflect.*;
 
-@Slf4j
 public class ReflectionUtil {
 
     public static void setAccessible(AccessibleObject member) {
