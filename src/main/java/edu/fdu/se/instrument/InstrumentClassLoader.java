@@ -1,9 +1,12 @@
 package edu.fdu.se.instrument;
 
+import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.io.file.FileWriter;
 import edu.fdu.se.instrument.util.ClassUtil;
 import edu.fdu.se.instrument.util.IOUtil;
 import edu.fdu.se.instrument.util.URLUtil;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.instrument.IllegalClassFormatException;
@@ -88,6 +91,10 @@ public class InstrumentClassLoader extends URLClassLoader {
             } catch (IllegalClassFormatException e) {
                 bytesToLoad = originalBytecode;
             }
+
+            File file = FileUtil.file("/Users/zhouzhuotong/test", path);
+            FileWriter writer = new FileWriter(file);
+            writer.write(bytesToLoad, 0, bytesToLoad.length);
 
             return defineClass(name, bytesToLoad, 0, bytesToLoad.length);
         }
