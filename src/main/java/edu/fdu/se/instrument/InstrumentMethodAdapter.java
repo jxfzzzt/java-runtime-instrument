@@ -122,10 +122,6 @@ public class InstrumentMethodAdapter extends GeneratorAdapter implements Opcodes
             mv.visitLdcInsn(this.methodSignature);
             mv.visitMethodInsn(INVOKESTATIC, InstrumentClassLoader.STATE_TABLE_INTERNAL_NAME, InstrumentClassLoader.ADD_METHOD_SIGNATURE, "(Ljava/lang/String;)V", false);
 
-            // record method sequence
-            mv.visitLdcInsn(this.methodSignature);
-            mv.visitMethodInsn(INVOKESTATIC, InstrumentClassLoader.STATE_TABLE_INTERNAL_NAME, InstrumentClassLoader.ADD_METHOD_INVOCATION, "(Ljava/lang/String;)V", false);
-
             // record the input params
             Type[] argumentTypes = super.getArgumentTypes();
             for (int i = 0; i < argumentTypes.length; i++) {

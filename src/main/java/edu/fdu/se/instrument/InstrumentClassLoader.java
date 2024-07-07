@@ -31,9 +31,6 @@ public class InstrumentClassLoader extends URLClassLoader {
 
     private static final byte[] STATE_NODE_BYTES;
 
-    private ClassLoader testcaseLoader = null;
-
-
     static {
         ClassLoader loader = getSystemClassLoader();
         try {
@@ -48,10 +45,6 @@ public class InstrumentClassLoader extends URLClassLoader {
 
     public InstrumentClassLoader(List<String> pathList) throws MalformedURLException {
         super(URLUtil.stringsToUrls(pathList.toArray(new String[0])), ClassLoader.getSystemClassLoader().getParent()); // break the parent delegation
-    }
-
-    public void setTestcaseLoader(ClassLoader testcaseLoader) {
-        this.testcaseLoader = testcaseLoader;
     }
 
     @Override
@@ -73,10 +66,6 @@ public class InstrumentClassLoader extends URLClassLoader {
 
             try {
                 InputStream in = super.getResourceAsStream(path);
-                if (in == null && testcaseLoader != null) {
-                    in = testcaseLoader.getResourceAsStream(path);
-                }
-
                 if (in == null) {
                     throw new ClassNotFoundException("Cannot find class " + name);
                 }
