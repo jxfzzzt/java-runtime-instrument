@@ -5,6 +5,16 @@ import edu.fdu.se.test.service.UserService;
 
 public class UserServiceImpl implements UserService {
 
+    private String id;
+
+    public UserServiceImpl() {
+        id = "test";
+    }
+
+    public UserServiceImpl(String id) {
+        this.id = id;
+    }
+
     @Override
     public User getUserById(int id) {
         User user = new User();

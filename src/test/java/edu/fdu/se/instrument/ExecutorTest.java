@@ -27,7 +27,7 @@ public class ExecutorTest {
 
     @Test
     public void testInstrumentAndExecute() {
-        MethodInvocationRecord record = Executor.instrumentAndExecute(jarPaths, "edu.fdu.se.test.controller.UserController", "queryUserById", new Class[]{int.class}, new Object[]{5});
+        MethodInvocationRecord record = Executor.instrumentAndExecute(jarPaths, "edu.fdu.se.test.service.impl.UserServiceImpl", "getUserById", new Class[]{int.class}, new Object[]{5});
         System.out.println(record.getMethodExecuteSigSet());
     }
 }

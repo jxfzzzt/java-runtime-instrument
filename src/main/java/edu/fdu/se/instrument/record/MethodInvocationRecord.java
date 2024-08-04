@@ -24,10 +24,10 @@ public final class MethodInvocationRecord {
 
     public MethodInvocationRecord(final ClassLoader loader, Map<String, StateNode> stateNodeMap,
                                   Set<String> methodExecuteSigSet, Map<Integer, String> methodInvocationMap) {
-        checkInvocationIdValid(invocationMap.keySet());
         this.methodExecuteSigSet = methodExecuteSigSet;
         this.methodInvocationMap = methodInvocationMap;
         this.stateNodeMap = stateNodeMap;
+        checkInvocationIdValid(methodInvocationMap.keySet());
     }
 
     private void checkInvocationIdValid(Set<Integer> invocationIdList) {
