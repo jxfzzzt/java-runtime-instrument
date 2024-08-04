@@ -6,7 +6,9 @@ Welcome to the Java Runtime Instrument! This tool allows you to directly obtain 
 It can capture the following information:
 
 - The sequence of method executions
-- The input parameters of each executed method
+- The input arguments value of each executed method
+- The return value of each executed method
+- The `this` of each executed method
 - The exceptions thrown by each method
 
 Most importantly, the instrumentation process does not interfere with the original execution logic of the program.
