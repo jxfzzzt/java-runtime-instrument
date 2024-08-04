@@ -54,6 +54,7 @@ public class InstrumentMethodAdapter extends GeneratorAdapter implements Opcodes
                 super.visitMethodInsn(opcode, owner, name, descriptor, isInterface);
             } else {
                 if (opcode == INVOKESPECIAL && "<init>".equals(name) && superName.equals(owner)) {
+                    // constructor need first execute `super()`, and then instrument
                     super.visitMethodInsn(opcode, owner, name, descriptor, isInterface);
                     super.visitLabel(startLabel);
                     this.hasSetStartLabel = true;
@@ -69,22 +70,22 @@ public class InstrumentMethodAdapter extends GeneratorAdapter implements Opcodes
     @Override
     public void visitMaxs(int maxStack, int maxLocals) {
         if (mv != null) {
-            // must visit first
-            super.visitMaxs(maxStack, maxLocals);
-
-            // (2) endLabel
+            // (1) endLabel
             super.visitLabel(endLabel);
 
-            // (3) handlerLabel
+            // (2) handlerLabel
             super.visitLabel(handlerLabel);
             int localIndex = getLocalIndex();
             super.visitVarInsn(ASTORE, localIndex);
 
-            // handle the throwable
+            // (3) handle the throwable
             this.onCatchThrowable(localIndex);
 
             // (4) visitTryCatchBlock
             super.visitTryCatchBlock(startLabel, endLabel, handlerLabel, "java/lang/Throwable");
+
+            // (5) must visit at end
+            super.visitMaxs(maxStack, maxLocals);
         }
     }
 
@@ -168,7 +169,6 @@ public class InstrumentMethodAdapter extends GeneratorAdapter implements Opcodes
             String key = this.methodSignature + "#return";
             mv.visitLdcInsn(key);
             mv.visitMethodInsn(INVOKESTATIC, InstrumentClassLoader.STATE_TABLE_INTERNAL_NAME, InstrumentClassLoader.ADD_STATE_NODE_METHOD_NAME, "(Ljava/lang/Object;Ljava/lang/String;)V", false);
-
         }
     }
 
