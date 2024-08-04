@@ -1,9 +1,9 @@
-##  Java Runtime Instrument
+#  Java Runtime Instrument
 
 ![Logo](./assets/logo.svg "Tool Logo")
 
 Welcome to the Java Runtime Instrument! This tool allows you to directly obtain the runtime state of your Java program via API usage. 
-It can capture and display the following information:
+It can capture the following information:
 
 - The sequence of method executions
 - The input parameters of each executed method
