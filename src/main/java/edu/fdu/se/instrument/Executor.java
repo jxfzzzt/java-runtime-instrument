@@ -28,7 +28,7 @@ public class Executor {
         try {
             instrumentClassLoader = new InstrumentClassLoader(jarPaths);
         } catch (MalformedURLException e) {
-            throw new InstrumentException("", e);
+            throw new InstrumentException("Fail to create InstrumentClassLoader with provided JAR paths.", e);
         }
         return execute(instrumentClassLoader, className, methodName, parameterTypes, args);
     }
@@ -56,7 +56,7 @@ public class Executor {
                 isExecMethod = true;
             }
         } catch (Exception e) {
-            throw new InstrumentException("", e);
+            throw new InstrumentException("Error occurred while loading class, constructor, or method for execution.", e);
         }
 
         try {
@@ -87,7 +87,7 @@ public class Executor {
                         .invoke();
             }
         } catch (Exception e) {
-            throw new InstrumentException("", e);
+            throw new InstrumentException("Error occurred during method or constructor execution.", e);
         }
 
         return afterExecute(inscurrentClassLoader, currentClassLoader);
@@ -102,7 +102,7 @@ public class Executor {
             Method resetMethod = tableClass.getDeclaredMethod("reset");
             resetMethod.invoke(null);
         } catch (Exception e) {
-            throw new InstrumentException("instrum", e);
+            throw new InstrumentException("Error occurred while resetting the global state table.", e);
         }
     }
 
@@ -140,7 +140,7 @@ public class Executor {
 
             return new MethodInvocationRecord(instrumentClassLoader, copyStateNode, runMethodSigSet, invocationRecordMap);
         } catch (Exception e) {
-            throw new InstrumentException("", e);
+            throw new InstrumentException("Error occurred while retrieving data in global state table after execution.", e);
         }
     }
 }

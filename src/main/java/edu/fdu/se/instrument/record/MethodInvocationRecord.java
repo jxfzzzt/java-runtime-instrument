@@ -34,7 +34,7 @@ public final class MethodInvocationRecord {
         int n = invocationIdList.size();
         for (int i = 1; i <= n; i++) {
             if (!invocationIdList.contains(i)) {
-                throw new InstrumentException("");
+                throw new InstrumentException("Invalid invocation ID: expected ID " + i + " is missing.");
             }
         }
     }
