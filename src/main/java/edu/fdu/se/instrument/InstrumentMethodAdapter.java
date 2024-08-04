@@ -70,7 +70,7 @@ public class InstrumentMethodAdapter extends GeneratorAdapter implements Opcodes
     public void visitMaxs(int maxStack, int maxLocals) {
         if (mv != null) {
             // must visit first
-            super.visitMaxs(maxStack + 1, maxLocals);
+            super.visitMaxs(maxStack, maxLocals);
 
             // (2) endLabel
             super.visitLabel(endLabel);

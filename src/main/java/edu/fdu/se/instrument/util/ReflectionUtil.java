@@ -1,9 +1,6 @@
 package edu.fdu.se.instrument.util;
 
 import com.nqzero.permit.Permit;
-import lombok.extern.slf4j.Slf4j;
-import sun.reflect.ReflectionFactory;
-
 import java.lang.reflect.*;
 
 public class ReflectionUtil {
@@ -48,20 +45,6 @@ public class ReflectionUtil {
 
     public static Object newInstance(String className, Object... args) throws Exception {
         return getFirstCtor(className).newInstance(args);
-    }
-
-    public static <T> T createWithoutConstructor(Class<T> classToInstantiate)
-            throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
-        return createWithConstructor(classToInstantiate, Object.class, new Class[0], new Object[0]);
-    }
-
-    public static <T> T createWithConstructor(Class<T> classToInstantiate, Class<? super T> constructorClass, Class<?>[] consArgTypes, Object[] consArgs)
-            throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
-        Constructor<? super T> objCons = constructorClass.getDeclaredConstructor(consArgTypes);
-        setAccessible(objCons);
-        Constructor<?> sc = ReflectionFactory.getReflectionFactory().newConstructorForSerialization(classToInstantiate, objCons);
-        setAccessible(sc);
-        return (T) sc.newInstance(consArgs);
     }
 
     public static Method getMethodByName(Class<?> clazz, String methodName) {

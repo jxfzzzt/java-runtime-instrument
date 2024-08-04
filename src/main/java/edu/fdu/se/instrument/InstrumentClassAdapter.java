@@ -30,7 +30,6 @@ public class InstrumentClassAdapter extends ClassVisitor implements Opcodes {
         if (mv != null) {
             boolean isAbstractMethod = (access & ACC_ABSTRACT) != 0;
             boolean isNativeMethod = (access & ACC_NATIVE) != 0;
-            boolean isConstructor = "<init>".equals(name);
             if (!isAbstractMethod && !isNativeMethod) {
                 mv = new InstrumentMethodAdapter(api, mv, className, access, name, descriptor, superName);
             }
