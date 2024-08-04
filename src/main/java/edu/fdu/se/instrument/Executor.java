@@ -9,6 +9,7 @@ import edu.fdu.se.instrument.state.StateNode;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,16 +23,17 @@ public class Executor {
 
     private final static TimeUnit TIME_UNIT = TimeUnit.MILLISECONDS;
 
-    public static MethodInvocationRecord instrumentAndExecute(List<String> jarPaths, String className, String methodName, Class[] parameterTypes, Object... args) throws InstrumentException {
+    public static MethodInvocationRecord instrumentAndExecute(List<String> jarPaths, String className, String methodName, Class[] parameterTypes, Object... args) {
+        ClassLoader instrumentClassLoader = null;
         try {
-            ClassLoader instrumentClassLoader = new InstrumentClassLoader(jarPaths);
-            return execute(instrumentClassLoader, className, methodName, parameterTypes, args);
-        } catch (Exception e) {
+            instrumentClassLoader = new InstrumentClassLoader(jarPaths);
+        } catch (MalformedURLException e) {
             throw new InstrumentException("", e);
         }
+        return execute(instrumentClassLoader, className, methodName, parameterTypes, args);
     }
 
-    private static MethodInvocationRecord execute(ClassLoader inscurrentClassLoader, String className, String methodName, Class[] parameterTypes, Object... args) throws InstrumentException {
+    private static MethodInvocationRecord execute(ClassLoader inscurrentClassLoader, String className, String methodName, Class[] parameterTypes, Object... args) {
         ClassLoader currentClassLoader = Thread.currentThread().getContextClassLoader();
         beforeExecute(inscurrentClassLoader);
 
