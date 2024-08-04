@@ -25,7 +25,7 @@ public class InstrumentClassLoader extends URLClassLoader {
 
     public static final String ADD_METHOD_SIGNATURE = "addMethodSignature";
 
-    public static final String ADD_METHOD_INVOCATION = "addMethodInvocation";
+    public static final String ADD_METHOD_INVOCATION = "addMethodInvokeSequence";
 
     private static final byte[] STATE_TABLE_BYTES;
 

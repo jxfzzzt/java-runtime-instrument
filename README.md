@@ -8,7 +8,6 @@ It can capture the following information:
 - The sequence of method executions
 - The input parameters of each executed method
 - The exceptions thrown by each method
-- The line number information during the execution of each method
 
 Most importantly, the instrumentation process does not interfere with the original execution logic of the program.
 

@@ -31,7 +31,7 @@ public class GlobalStateTable {
         STATE_SET.add(methodSignature);
     }
 
-    public synchronized static void addMethodInvocation(String methodSignature) {
+    public synchronized static void addMethodInvokeSequence(String methodSignature) {
         POINTER += 1;
         INVOCATION_RECORD_MAP.put(POINTER, methodSignature);
     }
@@ -183,7 +183,7 @@ public class GlobalStateTable {
         return new HashSet<>(STATE_SET);
     }
 
-    public synchronized static Map<Integer, String> getInvocationRecordMap() {
+    public synchronized static Map<Integer, String> getInvokeRecordMap() {
         return new HashMap<>(INVOCATION_RECORD_MAP);
     }
 }

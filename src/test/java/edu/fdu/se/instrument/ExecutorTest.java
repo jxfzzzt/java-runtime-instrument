@@ -28,6 +28,15 @@ public class ExecutorTest {
     @Test
     public void testInstrumentAndExecute() {
         MethodInvocationRecord record = Executor.instrumentAndExecute(jarPaths, "edu.fdu.se.test.service.impl.UserServiceImpl", "getUserById", new Class[]{int.class}, new Object[]{5});
-        System.out.println(record.getMethodExecuteSigSet());
+        System.out.println("Method Invoke Sequence: ");
+        record.getMethodInvokeSequence().forEach(System.out::println);
+        System.out.println();
+
+        System.out.println("Method Invoke State Map: ");
+        record.getStateNodeMap().forEach((k, v) -> System.out.println(k + "=" + v));
+        System.out.println();
+
+        System.out.println("Method Invoke Set: ");
+        record.getMethodExecuteSet().forEach(System.out::println);
     }
 }

@@ -135,8 +135,8 @@ public class Executor {
             Method getMethodSignatureSet = tableClass.getDeclaredMethod("getMethodSignatureSet");
             Set<String> runMethodSigSet = (Set<String>) getMethodSignatureSet.invoke(null);
 
-            Method getInvocationRecordMap = tableClass.getDeclaredMethod("getInvocationRecordMap");
-            Map<Integer, String> invocationRecordMap = (Map<Integer, String>) getInvocationRecordMap.invoke(null);
+            Method getInvokeRecordMap = tableClass.getDeclaredMethod("getInvokeRecordMap");
+            Map<Integer, String> invocationRecordMap = (Map<Integer, String>) getInvokeRecordMap.invoke(null);
 
             return new MethodInvocationRecord(instrumentClassLoader, copyStateNode, runMethodSigSet, invocationRecordMap);
         } catch (Exception e) {
